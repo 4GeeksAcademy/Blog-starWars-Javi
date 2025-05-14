@@ -1,7 +1,7 @@
 import React from "react";
-import Characters from "../views/characters";
-import Planets from "../views/planets";
-import Vehicles from "../views/vehicles";
+import Characters from "./characters";
+import Planets from "./planets";
+import Vehicles from "./vehicles";
 
 
 export const Home = () => (
