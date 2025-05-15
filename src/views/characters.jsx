@@ -6,17 +6,14 @@ export const Characters = () => {
     const { store, actions } = useContext(StoreContext);
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    // Cargar los personajes cuando el componente se monte
     useEffect(() => {
         actions.showCharacters();
     }, []);
 
-    // Función para manejar el clic en el botón de avance
     const handleNext = () => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % store.people.length);
     };
 
-    // Función para manejar el clic en el botón de retroceso
     const handlePrev = () => {
         setCurrentIndex((prevIndex) => (prevIndex - 1 + store.people.length) % store.people.length);
     };
@@ -30,9 +27,9 @@ export const Characters = () => {
                         <div className="carousel-inner">
                             <div className="carousel-item active">
                                 <div className="card-group">
-                                    {store.people.map((character, index) => {
+                                    {Array.isArray(store.people) && store.people.length > 0 && store.people.map((character, index) => {
                                         const relativeIndex = (index - currentIndex + store.people.length) % store.people.length;
-                                        if (relativeIndex < 3) {
+                                        if (relativeIndex < 3 && character.result?.properties) {
                                             return (
                                                 <div className="card" key={index} style={{ flex: "0 0 auto", width: "300px", marginRight: "10px" }}>
                                                     <img src={`https://starwars-visualguide.com/assets/img/characters/${index + 1}.jpg`} className="card-img-top" alt="..." />

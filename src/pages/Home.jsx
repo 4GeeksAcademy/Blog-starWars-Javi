@@ -12,3 +12,4 @@ export const Home = () => (
 		<Vehicles/>
 	</div>
 );
+export default Home;

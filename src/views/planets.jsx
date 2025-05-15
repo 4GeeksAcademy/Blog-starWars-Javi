@@ -7,38 +7,34 @@ export const Planets = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [imageErrors, setImageErrors] = useState([]);
 
-    // Cargar los planetas cuando el componente se monte
     useEffect(() => {
         actions.showPlanets();
     }, []);
 
-    // Función para manejar el error de la imagen para un planeta específico
     const handleImageError = index => {
         setImageErrors(prevErrors => [...prevErrors, index]);
     };
 
-    // Función para manejar el clic en el botón de avance
     const handleNext = () => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % store.planets.length);
     };
 
-    // Función para manejar el clic en el botón de retroceso
     const handlePrev = () => {
         setCurrentIndex((prevIndex) => (prevIndex - 1 + store.planets.length) % store.planets.length);
     };
 
     return (
         <div className="container mb-5">
-            <h2 style={{color: "yellow"}}>Lista de Planetas</h2>
+            <h2 style={{ color: "yellow" }}>Lista de Planetas</h2>
             <div className="row">
                 <div className="col">
                     <div className="carousel slide" id="carouselExampleControls" data-bs-ride="carousel" style={{ position: "relative" }}>
                         <div className="carousel-inner">
                             <div className="carousel-item active">
                                 <div className="card-group">
-                                    {store.planets.map((planet, index) => {
+                                    {Array.isArray(store.planets) && store.planets.length > 0 && store.planets.map((planet, index) => {
                                         const relativeIndex = (index - currentIndex + store.planets.length) % store.planets.length;
-                                        if (relativeIndex < 3) {
+                                        if (relativeIndex < 3 && planet.result?.properties) {
                                             return (
                                                 <div className="card" key={index} style={{ flex: "0 0 auto", width: "300px", marginRight: "10px" }}>
                                                     <img
@@ -83,3 +79,5 @@ export const Planets = () => {
 };
 
 export default Planets;
+
+

@@ -7,22 +7,18 @@ export const Vehicles = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [imageErrors, setImageErrors] = useState([]);
 
-    // Cargar los vehículos cuando el componente se monte
     useEffect(() => {
         actions.showVehicles();
     }, []);
 
-    // Función para manejar el error de la imagen para un vehículo específico
     const handleImageError = index => {
         setImageErrors(prevErrors => [...prevErrors, index]);
     };
 
-    // Función para manejar el clic en el botón de avance
     const handleNext = () => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % store.vehicles.length);
     };
 
-    // Función para manejar el clic en el botón de retroceso
     const handlePrev = () => {
         setCurrentIndex((prevIndex) => (prevIndex - 1 + store.vehicles.length) % store.vehicles.length);
     };
@@ -36,9 +32,9 @@ export const Vehicles = () => {
                         <div className="carousel-inner">
                             <div className="carousel-item active">
                                 <div className="card-group">
-                                    {store.vehicles.map((vehicle, index) => {
+                                    {Array.isArray(store.vehicles) && store.vehicles.length > 0 && store.vehicles.map((vehicle, index) => {
                                         const relativeIndex = (index - currentIndex + store.vehicles.length) % store.vehicles.length;
-                                        if (relativeIndex < 3) {
+                                        if (relativeIndex < 3 && vehicle.result?.properties) {
                                             return (
                                                 <div className="card" key={index} style={{ flex: "0 0 auto", width: "300px", marginRight: "10px" }}>
                                                     <img

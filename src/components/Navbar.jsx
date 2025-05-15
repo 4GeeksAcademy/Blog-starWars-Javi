@@ -1,4 +1,6 @@
 import React from "react";
+import { useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 export const Navbar = () => {
@@ -63,3 +65,4 @@ export const Navbar = () => {
 		
 	);
 };
+export default Navbar;
